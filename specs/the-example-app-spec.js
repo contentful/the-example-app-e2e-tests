@@ -46,8 +46,8 @@ describe('The Example App', () => {
       cy.get('section.modal .modal__wrapper').should('hidden')
       cy.get('.header__upper-title a').click()
       cy.get('section.modal .modal__wrapper').should('visible')
-      cy.get('section.modal .modal__title').should('contain', 'A reference for developers using Contentful')
-      cy.get('section.modal .modal__content').should('contain', 'This is "The Example App" in node.js. While building your own apps with Contentful,')
+      cy.get('section.modal .modal__title').should('match', '/A reference for .* developers using Contentful/')
+      cy.get('section.modal .modal__content').should('match', '/This is "The .* Example App"\./')
 
       // Close on background
       cy.get('section.modal .modal__overlay').click({force: true})
@@ -175,7 +175,7 @@ describe('The Example App', () => {
       cy.get('.status-block')
         .should('have.length', 1)
         .invoke('text').then((text) => {
-          expect(text).to.match(/Connected to space “.+”/)
+          expect(text).to.contain('Connected space:')
         })
       cy.get('input#input-space-id').should('have.value', Cypress.env('CONTENTFUL_SPACE_ID'))
       cy.get('input#input-delivery-token').should('have.value', Cypress.env('CONTENTFUL_DELIVERY_TOKEN'))
@@ -195,15 +195,15 @@ describe('The Example App', () => {
       cy.get('input#input-space-id').parent().children('.form-item__error-wrapper')
         .should('exist')
         .find('.form-item__error-message')
-        .should('have.text', 'This field is required')
+        .should('contain', 'This field is required')
       cy.get('input#input-delivery-token').parent().children('.form-item__error-wrapper')
         .should('exist')
         .find('.form-item__error-message')
-        .should('have.text', 'This field is required')
+        .should('contain', 'This field is required')
       cy.get('input#input-preview-token').parent().children('.form-item__error-wrapper')
         .should('exist')
         .find('.form-item__error-message')
-        .should('have.text', 'This field is required')
+        .should('contain', 'This field is required')
     })
 
     it('validates field with actual client', () => {
@@ -219,7 +219,7 @@ describe('The Example App', () => {
       cy.get('input#input-delivery-token').parent().children('.form-item__error-wrapper')
         .should('exist')
         .find('.form-item__error-message')
-        .should('have.text', 'Your Delivery API key is invalid.')
+        .should('contain', 'Your Delivery API key is invalid.')
     })
 
     it('shows success message when valid credentials are supplied', () => {
