@@ -46,8 +46,8 @@ describe('The Example App', () => {
       cy.get('section.modal .modal__wrapper').should('hidden')
       cy.get('.header__upper-title a').click()<
       cy.get('section.modal .modal__wrapper').should('visible')
-      cy.get('section.modal .modal__title').should('match', /A reference for (\.NET|Ruby|Python|Node\.js|PHP|Swift|Android|Java) developers using Contentful/g)
-      cy.get('section.modal .modal__content').should('match', /This is "The (\.NET|Ruby|Python|Node\.js|PHP|Swift|Android|Java) Example App"\./g)
+      cy.get('section.modal .modal__title').invoke('text').then((text) => expect(text).to.match(/A reference for (\.NET|Ruby|Python|Node\.js|PHP|Swift|Android|Java) developers using Contentful/))
+      cy.get('section.modal .modal__content').invoke('text').then((text) => expect(text).to.match(/This is "The (\.NET|Ruby|Python|Node\.js|PHP|Swift|Android|Java) Example App"\./))
 
       // Close on background
       cy.get('section.modal .modal__overlay').click({force: true})
