@@ -69,7 +69,7 @@ A proper call of the binary would be the following:
 (Assuming the repo is cloned into ./test/e2e)
 
 ```sh
-./test/e2e/node_modules/.bin/cypress run --spec ./test/e2e/specs/the-example-app-spec.js --env CONTENTFUL_SPACE_ID=<space_id>,CONTENTFUL_DELIVERY_TOKEN=<delivery_token>,CONTENTFUL_PREVIEW_TOKEN=<preview_token>
+./test/e2e/node_modules/.bin/cypress run --env CONTENTFUL_SPACE_ID=<space_id>,CONTENTFUL_DELIVERY_TOKEN=<delivery_token>,CONTENTFUL_PREVIEW_TOKEN=<preview_token>
 ```
 
 You may pass `--headed` when the test is **not** running on CI, this will open the web browser so you can watch it testing your app.
