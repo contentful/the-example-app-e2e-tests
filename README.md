@@ -1,12 +1,12 @@
 ## The Example App end-to-end tests
 
-These e2e tests are used to ensure that all implementations of `The Example App` share the same functionality. You may use this repository as reference how to implement end-to-end tests via [cypress](https://www.cypress.io/) but it is not needed at all to get `The Example App` running on your machine nor to write a project using Contentful.
+These e2e tests are used to ensure that all web-based implementations of `The Example App` share the same functionality. You may use this repository as a reference for implementing end-to-end tests with [cypress](https://www.cypress.io/). It is not necessary to use this repository to get `The Example App` running on your machine.
 
 ## What is Contentful?
 
 [Contentful](https://www.contentful.com) provides a content infrastructure for digital teams to power content in websites, apps, and devices. Unlike a CMS, Contentful was built to integrate with the modern software stack. It offers a central hub for structured content, powerful management and delivery APIs, and a customizable web app that enable developers and content creators to ship digital products faster.
 
-## How to set it up for my SDK language?
+## Setup
 
 ### Circle-CI configuration file
 
