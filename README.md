@@ -1,4 +1,4 @@
-## The example app end-to-end tests
+## The Example App end-to-end tests
 
 These e2e tests are used to ensure that all implementations of `The Example App` share the same functionality. You may use this repository as reference how to implement end-to-end tests via [cypress](https://www.cypress.io/) but it is not needed at all to get `The Example App` running on your machine nor to write a project using Contentful.
 
