@@ -29,8 +29,14 @@ describe('The Example App', () => {
         .should('attr', 'color', '#4a90e2')
       cy.get('meta[name="theme-color"]').should('attr', 'content', '#ffffff')
     })
+  })
 
-    it('global elements', () => {
+  context('global elements', () => {
+    beforeEach(() => {
+      cy.visit('/')
+    })
+
+    it('header & footer content', () => {
       cy.get('.header__upper')
         .should('contain', 'Help')
         .should('contain', 'GitHub')
@@ -92,6 +98,22 @@ describe('The Example App', () => {
       cy.location('search')
         .should('contain', 'locale=de')
         .should('contain', 'api=cpa')
+    })
+  })
+
+  context('navigation', () => {
+    beforeEach(() => {
+      cy.visit('/')
+    })
+
+    it('top navigaton works', () => {
+      cy.get('header nav > ul > li:nth-child(2) > a').click()
+      cy.url().should('match', /\/courses$/)
+    })
+
+    it('bottom navigaton works', () => {
+      cy.get('footer nav > ul > li:nth-child(2) > a').click()
+      cy.url().should('match', /\/courses$/)
     })
   })
 })
