@@ -1,3 +1,5 @@
+const { languages } = require('../dictionaries')
+
 describe('The Example App', () => {
   context('basics', () => {
     beforeEach(() => {
@@ -41,6 +43,9 @@ describe('The Example App', () => {
         .should('contain', 'Help')
         .should('contain', 'GitHub')
 
+      cy.get('.header__logo img')
+        .should('attr', 'src', `/images/the-example-app-logo-${Cypress.env('LANGUAGE')}.svg`)
+
       cy.get('.main__footer .footer__lower')
         .should('contain', 'Powered by Contentful')
         .should('contain', 'GitHub')
@@ -52,8 +57,8 @@ describe('The Example App', () => {
       cy.get('section.modal .modal__wrapper').should('hidden')
       cy.get('.header__upper-title a').click()
       cy.get('section.modal .modal__wrapper').should('visible')
-      cy.get('section.modal .modal__title').invoke('text').then((text) => expect(text).to.match(/A reference for (\.NET|Ruby|Python|Node\.js|PHP|Swift|Android|Java) developers using Contentful/))
-      cy.get('section.modal .modal__content').invoke('text').then((text) => expect(text).to.match(/This is "The (\.NET|Ruby|Python|Node\.js|PHP|Swift|Android|Java) Example App"\./))
+      cy.get('section.modal .modal__title').should('contain', `A reference for ${languages[Cypress.env('LANGUAGE')]} developers using Contentful`)
+      cy.get('section.modal .modal__content').should('contain', `This is "The ${languages[Cypress.env('LANGUAGE')]} Example App`)
 
       // Close on background
       cy.get('section.modal .modal__overlay').click({force: true})
