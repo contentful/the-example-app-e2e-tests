@@ -69,8 +69,18 @@ A proper call of the binary would be the following:
 (Assuming the repo is cloned into ./test/e2e)
 
 ```sh
-./test/e2e/node_modules/.bin/cypress run --env CONTENTFUL_SPACE_ID=<space_id>,CONTENTFUL_DELIVERY_TOKEN=<delivery_token>,CONTENTFUL_PREVIEW_TOKEN=<preview_token>
+./test/e2e/node_modules/.bin/cypress run --env LANGUAGE=<your_language_code>,CONTENTFUL_SPACE_ID=<space_id>,CONTENTFUL_DELIVERY_TOKEN=<delivery_token>,CONTENTFUL_PREVIEW_TOKEN=<preview_token>
 ```
+
+Valid language codes are:
+* dotnet
+* ruby
+* python
+* nodejs
+* php
+* swift
+* android
+* java
 
 You may pass `--headed` when the test is **not** running on CI, this will open the web browser so you can watch it testing your app.
 
