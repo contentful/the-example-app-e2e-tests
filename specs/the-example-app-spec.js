@@ -44,7 +44,7 @@ describe('The Example App', () => {
 
     it('about modal', () => {
       cy.get('section.modal .modal__wrapper').should('hidden')
-      cy.get('.header__upper-title a').click()<
+      cy.get('.header__upper-title a').click()
       cy.get('section.modal .modal__wrapper').should('visible')
       cy.get('section.modal .modal__title').invoke('text').then((text) => expect(text).to.match(/A reference for (\.NET|Ruby|Python|Node\.js|PHP|Swift|Android|Java) developers using Contentful/))
       cy.get('section.modal .modal__content').invoke('text').then((text) => expect(text).to.match(/This is "The (\.NET|Ruby|Python|Node\.js|PHP|Swift|Android|Java) Example App"\./))
