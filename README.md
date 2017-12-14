@@ -61,8 +61,8 @@ Adjust the `baseUrl` to match your web servers url & port. You might also need t
 #### 1. Write a script, that does the following:
 
 * Open a web server with your app
-* Executes the cypress binary with the correct parameters (see below)
-* Close the web server when the tests completed. In case the binary existed with an error code, also exit your script with an error code to fail the CI run.
+* Execute the cypress binary with the correct parameters (see below)
+* Close the web server when the tests completed. In case the binary exited with an error code, also exit your script with an error code to fail the CI run.
 
 A proper call of the binary would be the following:
 
@@ -74,7 +74,7 @@ A proper call of the binary would be the following:
 
 You may pass `--headed` when the test is **not** running on CI, this will open the web browser so you can watch it testing your app.
 
-**Important note**: Cypress seems to be pretty flaky with command line arguments parsing. Avoid extra spaces and unnecessary other stuff. An indicator that you did sth wrong with the parameters would be, if the settings test fail which checks if the space id is actually displayed in the space id field.
+**Important note**: Cypress seems to be pretty flaky with command line arguments parsing. Avoid extra spaces and unnecessary other stuff. An indicator that you did something wrong with the parameters would be, if the settings test fail which checks if the space id is actually displayed in the space id field.
 
 #### 2. Add this script to your tests
 
