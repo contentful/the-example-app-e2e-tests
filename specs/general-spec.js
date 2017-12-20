@@ -1,7 +1,7 @@
 const { languages } = require('../dictionaries')
 
-describe('The Example App', () => {
-  context('basics', () => {
+describe('The Example App - General', () => {
+  context('Basics', () => {
     beforeEach(() => {
       cy.visit('/')
     })
@@ -33,7 +33,7 @@ describe('The Example App', () => {
     })
   })
 
-  context('global elements', () => {
+  context('Global elements', () => {
     beforeEach(() => {
       cy.visit('/')
     })
@@ -106,7 +106,7 @@ describe('The Example App', () => {
     })
   })
 
-  context('navigation', () => {
+  context('Navigation', () => {
     beforeEach(() => {
       cy.visit('/')
     })

@@ -6,7 +6,7 @@ function formItemByLabel (label) {
     .find('input')
 }
 
-describe('The Example App', () => {
+describe('The Example App - Settings', () => {
   context('Settings', () => {
     beforeEach(() => {
       cy.visit('/settings')
