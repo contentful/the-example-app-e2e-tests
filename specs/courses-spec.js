@@ -1,4 +1,4 @@
-describe('The Example App', () => {
+describe('The Example App - Courses', () => {
   context('Courses', () => {
     afterEach(() => {
       cy.title().should('match', / — The Example App$/, 'Title has contextual suffix (appname)')
