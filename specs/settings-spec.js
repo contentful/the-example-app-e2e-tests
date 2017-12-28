@@ -1,10 +1,4 @@
-function formItemByLabel (label) {
-  return cy
-    .get('label')
-    .contains(label)
-    .parents('.form-item')
-    .find('input')
-}
+const { formItemByLabel } = require('../utils')
 
 describe('The Example App - Settings', () => {
   context('Settings', () => {
