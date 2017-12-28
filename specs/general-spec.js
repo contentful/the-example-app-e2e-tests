@@ -106,6 +106,17 @@ describe('The Example App - General', () => {
     })
   })
 
+  context('preview mode´', () => {
+    it('user can enable preview mode via UI', () => {
+      cy.get('header :nth-child(1) > form > .header__controls_label')
+        .click()
+        .parents('form')
+        .find('button[value=cpa]')
+        .click()
+      // @todo extend to check url and more
+    })
+  })
+
   context('Navigation', () => {
     beforeEach(() => {
       cy.visit('/')
