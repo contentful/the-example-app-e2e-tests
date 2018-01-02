@@ -1,14 +1,14 @@
 describe('The Example App - Home', () => {
-  context('Home - non QA', () => {
+  context('non QA', () => {
     it('Renders home page', () => {
       cy.visit('/')
       cy.get('main .module-highlighted-course').should('have.length.gte', 1, 'should have at least one highlighted course')
     })
   })
 
-  context('Home - QA', () => {
+  context.only('QA', () => {
     before(() => {
-      // Go back to home
+      // Switch to QA space via url parameters
       const getParams = [
         `space_id=${Cypress.env('CONTENTFUL_QA_SPACE_ID')}`,
         `delivery_token=${Cypress.env('CONTENTFUL_QA_DELIVERY_TOKEN')}`,
@@ -24,16 +24,31 @@ describe('The Example App - Home', () => {
       cy.get('main .module-highlighted-course')
         .should('have.length', 1, 'should have only one highlighted course module')
 
-      // Switch to preview
+      // Switch to content preview api
       cy.visit('/?api=cpa')
 
       // Should show all modules, one for each variant
       cy.get('main .module')
         .should('have.length', 4, 'should have 4 modules')
+    })
 
-      // @todo check correct order of modules
+    it('Orders modules in correctly', () => {
+      cy.get('main .module')
+        .then(($items) => {
+          const { _ } = Cypress
+          const classNames = _.map($items, ($item) => $item.className)
+            .map((className) => (/module-(.+)/.exec(className) || [])[0])
 
-      // Highlighted course modules
+          expect(classNames).to.deep.equal([
+            'module-highlighted-course',
+            'module-hero-image',
+            'module-copy--emphasized',
+            'module-copy'
+          ])
+        })
+    })
+
+    it('Renders highlighted course module', () => {
       cy.get('main .module-highlighted-course')
         .should('have.length', 1, 'should have one highlighted course module')
 
@@ -56,8 +71,9 @@ describe('The Example App - Home', () => {
         .should('contain', 'view course', 'Course link has correct text')
         .and('have.attr', 'href')
         .and('match', /^\/courses\/hello-world/, 'Course link links to correct page')
+    })
 
-      // Hero image
+    it('Renders hero image module', () => {
       cy.get('main .module-hero-image__image')
         .should('have.length', 1, 'should have one hero image module')
 
@@ -67,8 +83,9 @@ describe('The Example App - Home', () => {
 
       cy.get('main .module-hero-image__headline')
         .should('contain', '[Draft] Hero Image Copy', 'displays headline')
+    })
 
-      // Copy
+    it('Renders copy module', () => {
       function testCopyModule (base, mod) {
         cy.get(`.${base}${mod}`)
           .should('have.length', 1, 'should have one basic copy module variant')
