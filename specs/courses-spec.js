@@ -1,3 +1,5 @@
+const { switchToQASpace } = require('../utils')
+
 describe('The Example App - Courses', () => {
   context('Courses - non QA', () => {
     afterEach(() => {
@@ -62,15 +64,7 @@ describe('The Example App - Courses', () => {
   })
 
   context('Courses - QA', () => {
-    before(() => {
-      // Switch to QA space via url parameters
-      const getParams = [
-        `space_id=${Cypress.env('CONTENTFUL_QA_SPACE_ID')}`,
-        `delivery_token=${Cypress.env('CONTENTFUL_QA_DELIVERY_TOKEN')}`,
-        `preview_token=${Cypress.env('CONTENTFUL_QA_PREVIEW_TOKEN')}`
-      ]
-      cy.visit(`/courses?${getParams.join('&')}`)
-    })
+    before(switchToQASpace)
 
     it('orders courses by creation date', () => {
       cy.get('.grid-list .grid-list__item .course-card__title')
@@ -80,6 +74,54 @@ describe('The Example App - Courses', () => {
           const posHelloWorld = titles.findIndex((title) => title === 'Hello world')
 
           expect(posHowTo).lt(posHelloWorld, '"How to" course is displayed before "hello world" course')
+        })
+    })
+
+    it.only('renders lesson modules', () => {
+      cy.visit('/courses/hello-world/lessons/architecture')
+      cy.get('.lesson-module-copy__copy')
+        .within(() => {
+          cy.get('img')
+            .should('have.length', 1)
+          cy.get('p')
+            .should('have.length.gt', 1)
+        })
+
+      cy.get('.lesson-module-image')
+        .within(() => {
+          cy.get('figure img')
+            .should('have.length', 1)
+          cy.get('figure figcaption')
+            .should('have.length', 1)
+            .should('have.text', 'Contentful\'s APIs send data in JSON format which enables cross channel distribution of content.')
+        })
+
+      cy.visit('/courses/how-the-example-app-is-built/lessons/fetch-all-entries')
+      cy.get('.lesson-module-code')
+        .within(() => {
+          cy.get('.lesson-module-code__header .lesson-module-code__trigger')
+            .should('have.length.gt', 1)
+
+          let language = Cypress.env('LANGUAGE')
+          // Exception for node javascript
+          if (language === 'nodejs') {
+            language = 'javascript'
+          }
+          cy.get(`.lesson-module-code__header [data-target="3QJuO2TNxm0OqSgIMaoCwi-${language}"]`)
+            .should('have.class', 'lesson-module-code__trigger--active', 'Correct language is active in menu by default')
+          cy.get(`.lesson-module-code__code#3QJuO2TNxm0OqSgIMaoCwi-${language}`)
+            .should('have.class', 'lesson-module-code__code--active', 'Correct language code is visible by default')
+
+          // Switch to curl
+          cy.get(`.lesson-module-code__header [data-target="3QJuO2TNxm0OqSgIMaoCwi-curl"]`)
+            .click()
+            .should('have.class', 'lesson-module-code__trigger--active', 'Curl gets active when clicked')
+          cy.get(`.lesson-module-code__code#3QJuO2TNxm0OqSgIMaoCwi-curl`)
+            .should('have.class', 'lesson-module-code__code--active', 'Curl code is visible when clicked')
+          cy.get(`.lesson-module-code__header [data-target="3QJuO2TNxm0OqSgIMaoCwi-${language}"]`)
+            .should('have.not.class', 'lesson-module-code__trigger--active', 'default language is no more active')
+          cy.get(`.lesson-module-code__code#3QJuO2TNxm0OqSgIMaoCwi-${language}`)
+            .should('have.not.class', 'lesson-module-code__code--active', 'default language code is no more visible')
         })
     })
   })
