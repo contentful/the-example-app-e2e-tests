@@ -1,3 +1,5 @@
+const { switchToQASpace } = require('../utils')
+
 describe('The Example App - Home', () => {
   context('non QA', () => {
     it('Renders home page', () => {
@@ -7,15 +9,7 @@ describe('The Example App - Home', () => {
   })
 
   context.only('QA', () => {
-    before(() => {
-      // Switch to QA space via url parameters
-      const getParams = [
-        `space_id=${Cypress.env('CONTENTFUL_QA_SPACE_ID')}`,
-        `delivery_token=${Cypress.env('CONTENTFUL_QA_DELIVERY_TOKEN')}`,
-        `preview_token=${Cypress.env('CONTENTFUL_QA_PREVIEW_TOKEN')}`
-      ]
-      cy.visit(`/?${getParams.join('&')}`)
-    })
+    before(switchToQASpace)
 
     it('Renders all modules and variants', () => {
       // Verify we can see only a single highlighted course
