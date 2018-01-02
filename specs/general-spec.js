@@ -59,6 +59,34 @@ describe('The Example App - General', () => {
       cy.get('section.modal .modal__wrapper').should('visible')
       cy.get('section.modal .modal__title').should('contain', `A reference for ${languages[Cypress.env('LANGUAGE')]} developers using Contentful`)
       cy.get('section.modal .modal__content').should('contain', `This is "The ${languages[Cypress.env('LANGUAGE')]} Example App`)
+      cy.get('section.modal .modal__content')
+        .within(() => {
+          const { $, _ } = Cypress
+          cy.get('a').should((links) => {
+            expect($(links[0]).attr('href')).to.eq(`https://github.com/contentful/the-example-app.${Cypress.env('LANGUAGE')}`)
+            expect($(links[1]).attr('href')).to.eq('https://github.com/contentful/content-models/blob/master/the-example-app/README.md ')
+          })
+
+          let enabledVariants = [
+            'nodejs',
+            'dotnet',
+            'ruby',
+            'php',
+            'python'
+          ]
+
+          cy.get('ul li').should((listItems) => {
+            _.each(listItems, (listItem) => {
+              const listItem$ = $(listItem)
+              const img$ = listItem$.find('img')
+              const language = img$.attr('src').match(/-(.*)\.svg/)[1]
+              enabledVariants = enabledVariants
+                .filter((variant) => variant !== language)
+            })
+
+            expect(enabledVariants.length).to.eq(0, 'all enabled variables are actually enabled')
+          })
+        })
 
       // Close on background
       cy.get('section.modal .modal__overlay').click({force: true})

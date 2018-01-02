@@ -77,7 +77,7 @@ describe('The Example App - Courses', () => {
         })
     })
 
-    it.only('renders lesson modules', () => {
+    it('renders lesson modules', () => {
       cy.visit('/courses/hello-world/lessons/architecture')
       cy.get('.lesson-module-copy__copy')
         .within(() => {
