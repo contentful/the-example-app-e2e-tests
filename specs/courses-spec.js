@@ -1,5 +1,5 @@
 describe('The Example App - Courses', () => {
-  context('Courses', () => {
+  context('Courses - non QA', () => {
     afterEach(() => {
       cy.title().should('match', / — The Example App$/, 'Title has contextual suffix (appname)')
     })
@@ -58,6 +58,29 @@ describe('The Example App - Courses', () => {
       cy.get('.table-of-contents .table-of-contents__list .table-of-contents__item:nth-child(2) a')
         .should('have.class', 'active')
         .should('have.class', 'visited')
+    })
+  })
+
+  context('Courses - QA', () => {
+    before(() => {
+      // Switch to QA space via url parameters
+      const getParams = [
+        `space_id=${Cypress.env('CONTENTFUL_QA_SPACE_ID')}`,
+        `delivery_token=${Cypress.env('CONTENTFUL_QA_DELIVERY_TOKEN')}`,
+        `preview_token=${Cypress.env('CONTENTFUL_QA_PREVIEW_TOKEN')}`
+      ]
+      cy.visit(`/courses?${getParams.join('&')}`)
+    })
+
+    it('orders courses by creation date', () => {
+      cy.get('.grid-list .grid-list__item .course-card__title')
+        .then(($items) => {
+          const titles = Cypress._.map($items, ($item) => $item.innerText)
+          const posHowTo = titles.findIndex((title) => title === 'How the example app is built')
+          const posHelloWorld = titles.findIndex((title) => title === 'Hello world')
+
+          expect(posHowTo).lt(posHelloWorld, '"How to" course is displayed before "hello world" course')
+        })
     })
   })
 })
