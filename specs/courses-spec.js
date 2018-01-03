@@ -64,9 +64,11 @@ describe('The Example App - Courses', () => {
   })
 
   context('Courses - QA', () => {
-    before(switchToQASpace)
+    beforeEach(switchToQASpace)
 
     it('orders courses by creation date', () => {
+      cy.visit('/courses')
+
       cy.get('.grid-list .grid-list__item .course-card__title')
         .then(($items) => {
           const titles = Cypress._.map($items, ($item) => $item.innerText)

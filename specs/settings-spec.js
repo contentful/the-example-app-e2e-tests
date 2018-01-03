@@ -37,7 +37,7 @@ describe('The Example App - Settings', () => {
     })
 
     it('validates field with actual client', () => {
-      formItemByLabel('Space ID').clear().type(Math.random().toString(36).substring(12))
+      formItemByLabel('Space ID').clear().type(Math.random().toString(36).substring(2, 12))
       formItemByLabel('Content Delivery API access token').clear().type(Math.random().toString(36))
       formItemByLabel('Content Preview API access token').clear().type(Math.random().toString(36))
       cy.get('input[type=submit]').click()
