@@ -8,10 +8,12 @@ describe('The Example App - Home', () => {
     })
   })
 
-  context.only('QA', () => {
-    before(switchToQASpace)
+  context('QA', () => {
+    beforeEach(switchToQASpace)
 
     it('Renders all modules and variants', () => {
+      cy.visit('/')
+
       // Verify we can see only a single highlighted course
       cy.get('main .module')
         .should('have.length', 1, 'should have only one module')
@@ -27,6 +29,8 @@ describe('The Example App - Home', () => {
     })
 
     it('Orders modules in correctly', () => {
+      cy.visit('/?api=cpa')
+
       cy.get('main .module')
         .then(($items) => {
           const { _ } = Cypress
@@ -43,6 +47,8 @@ describe('The Example App - Home', () => {
     })
 
     it('Renders highlighted course module', () => {
+      cy.visit('/?api=cpa')
+
       cy.get('main .module-highlighted-course')
         .should('have.length', 1, 'should have one highlighted course module')
 
@@ -68,6 +74,8 @@ describe('The Example App - Home', () => {
     })
 
     it('Renders hero image module', () => {
+      cy.visit('/?api=cpa')
+
       cy.get('main .module-hero-image__image')
         .should('have.length', 1, 'should have one hero image module')
 
@@ -80,6 +88,8 @@ describe('The Example App - Home', () => {
     })
 
     it('Renders copy module', () => {
+      cy.visit('/?api=cpa')
+
       function testCopyModule (base, mod) {
         cy.get(`.${base}${mod}`)
           .should('have.length', 1, 'should have one basic copy module variant')
