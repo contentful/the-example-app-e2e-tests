@@ -69,7 +69,7 @@ A proper call of the binary would be the following:
 (Assuming the repo is cloned into ./test/e2e)
 
 ```sh
-./test/e2e/node_modules/.bin/cypress run --env LANGUAGE=<your_language_code>,CONTENTFUL_SPACE_ID=<space_id>,CONTENTFUL_DELIVERY_TOKEN=<delivery_token>,CONTENTFUL_PREVIEW_TOKEN=<preview_token>
+./test/e2e/node_modules/.bin/cypress run --env LANGUAGE=<your_language_code>,CONTENTFUL_SPACE_ID=<space_id>,CONTENTFUL_DELIVERY_TOKEN=<delivery_token>,CONTENTFUL_PREVIEW_TOKEN=<preview_token>,CONTENTFUL_QA_SPACE_ID=<qa_space_space_id>,CONTENTFUL_QA_DELIVERY_TOKEN=<qa_space_delivery_token>,CONTENTFUL_QA_PREVIEW_TOKEN=<qa_space_preview_token>
 ```
 
 Valid language codes are:
