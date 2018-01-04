@@ -134,7 +134,7 @@ describe('The Example App - General', () => {
     })
   })
 
-  context('preview mode´', () => {
+  context('preview mode', () => {
     it('user can enable preview mode via UI', () => {
       cy.get('header :nth-child(1) > form > .header__controls_label')
         .click()
