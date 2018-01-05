@@ -13,7 +13,7 @@ module.exports = {
     dotnet: 'https://github.com/contentful/the-example-app.csharp',
     ruby: 'https://github.com/contentful/the-example-app.rb',
     python: 'https://github.com/contentful/the-example-app.py',
-    nodejs: 'https://github.com/contentful/the-example-app.rb',
+    nodejs: 'https://github.com/contentful/the-example-app.nodejs',
     php: 'https://github.com/contentful/the-example-app.php',
     swift: 'https://github.com/contentful/the-example-app.swift',
     android: 'https://github.com/contentful/the-example-app.android',
