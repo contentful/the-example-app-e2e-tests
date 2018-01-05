@@ -1,4 +1,4 @@
-const { languages } = require('../dictionaries')
+const { languages, repos } = require('../dictionaries')
 
 describe('The Example App - General', () => {
   context('Basics', () => {
@@ -61,9 +61,9 @@ describe('The Example App - General', () => {
       cy.get('section.modal .modal__content').should('contain', `This is "The ${languages[Cypress.env('LANGUAGE')]} Example App`)
       cy.get('section.modal .modal__content')
         .within(() => {
-          const { $, _ } = Cypress
+          const { $ } = Cypress
           cy.get('a').should((links) => {
-            expect($(links[0]).attr('href')).to.eq(`https://github.com/contentful/the-example-app.${Cypress.env('LANGUAGE')}`)
+            expect($(links[0]).attr('href')).to.eq(repos[Cypress.env('LANGUAGE')])
             expect($(links[1]).attr('href')).to.eq('https://github.com/contentful/content-models/blob/master/the-example-app/README.md ')
           })
 
@@ -76,15 +76,12 @@ describe('The Example App - General', () => {
           ]
 
           cy.get('ul li').should((listItems) => {
-            _.each(listItems, (listItem) => {
-              const listItem$ = $(listItem)
-              const img$ = listItem$.find('img')
-              const language = img$.attr('src').match(/-(.*)\.svg/)[1]
-              enabledVariants = enabledVariants
-                .filter((variant) => variant !== language)
-            })
+            let enabledLanguages = listItems.find('img').not('.inactive')
+            expect(enabledLanguages.length).to.eq(enabledVariants.length, 'all enabled languages are actually enabled')
 
-            expect(enabledVariants.length).to.eq(0, 'all enabled variables are actually enabled')
+            enabledLanguages.each((index) => {
+              expect($(enabledLanguages[index]).attr('src')).to.match(new RegExp(enabledVariants.join('|')))
+            })
           })
         })
 
@@ -135,6 +132,10 @@ describe('The Example App - General', () => {
   })
 
   context('preview mode', () => {
+    beforeEach(() => {
+      cy.visit('/')
+    })
+
     it('user can enable preview mode via UI', () => {
       cy.get('header :nth-child(1) > form > .header__controls_label')
         .click()

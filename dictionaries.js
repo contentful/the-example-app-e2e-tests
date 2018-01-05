@@ -8,5 +8,15 @@ module.exports = {
     swift: 'Swift',
     android: 'Android',
     java: 'Java'
+  },
+  repos: {
+    dotnet: 'https://github.com/contentful/the-example-app.csharp',
+    ruby: 'https://github.com/contentful/the-example-app.rb',
+    python: 'https://github.com/contentful/the-example-app.py',
+    nodejs: 'https://github.com/contentful/the-example-app.rb',
+    php: 'https://github.com/contentful/the-example-app.php',
+    swift: 'https://github.com/contentful/the-example-app.swift',
+    android: 'https://github.com/contentful/the-example-app.android',
+    java: 'https://github.com/contentful/the-example-app.java'
   }
 }
