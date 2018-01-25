@@ -76,11 +76,20 @@ describe('The Example App - General', () => {
           ]
 
           cy.get('ul li').should((listItems) => {
-            let enabledLanguages = listItems.find('img').not('.inactive')
+            const enabledLanguages = listItems.find('img').not('.inactive')
             expect(enabledLanguages.length).to.eq(enabledVariants.length, 'all enabled languages are actually enabled')
 
             enabledLanguages.each((index) => {
               expect($(enabledLanguages[index]).attr('src')).to.match(new RegExp(enabledVariants.join('|')))
+            })
+
+            listItems.each((index) => {
+              const links = $(listItems[index]).find('a')
+              if (links.length > 0) {
+                expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*space_id=.+/)
+                expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*delivery_token=.+/)
+                expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*preview_token=.+/)
+              }
             })
           })
         })
