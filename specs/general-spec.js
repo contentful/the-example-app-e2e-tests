@@ -1,4 +1,5 @@
 const { languages, repos } = require('../dictionaries')
+const { switchToQASpace } = require('../utils')
 
 describe('The Example App - General', () => {
   context('Basics', () => {
@@ -86,9 +87,9 @@ describe('The Example App - General', () => {
             listItems.each((index) => {
               const links = $(listItems[index]).find('a')
               if (links.length > 0) {
-                expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*space_id=.+/)
-                expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*delivery_token=.+/)
-                expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*preview_token=.+/)
+                expect(links[0]).attr('href').not.to.match(/https:\/\/[^/]+\/?.*space_id=.+/)
+                expect(links[0]).attr('href').not.to.match(/https:\/\/[^/]+\/?.*delivery_token=.+/)
+                expect(links[0]).attr('href').not.to.match(/https:\/\/[^/]+\/?.*preview_token=.+/)
               }
             })
           })
@@ -137,6 +138,31 @@ describe('The Example App - General', () => {
       cy.location('search')
         .should('contain', 'locale=de')
         .should('contain', 'api=cpa')
+    })
+  })
+
+  context('Global elements - QA', () => {
+    beforeEach(() => {
+      switchToQASpace()
+    })
+
+    it('about modal links contain credentials when they differ from default', () => {
+      cy.get('.header__upper-title a').click()
+      cy.get('section.modal .modal__content')
+        .within(() => {
+          const { $ } = Cypress
+
+          cy.get('ul li').should((listItems) => {
+            listItems.each((index) => {
+              const links = $(listItems[index]).find('a')
+              if (links.length > 0) {
+                expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*space_id=.+/)
+                expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*delivery_token=.+/)
+                expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*preview_token=.+/)
+              }
+            })
+          })
+        })
     })
   })
 
