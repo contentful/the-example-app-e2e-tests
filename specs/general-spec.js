@@ -73,7 +73,8 @@ describe('The Example App - General', () => {
             'dotnet',
             'ruby',
             'php',
-            'python'
+            'python',
+            'java'
           ]
 
           cy.get('ul li').should((listItems) => {
