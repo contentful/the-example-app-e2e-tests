@@ -1,0 +1,40 @@
+describe('The Example App - Imprint', () => {
+  context('non QA', () => {
+    it('Renders imprint page', () => {
+      cy.visit('/imprint')
+      cy.get('main .main__content .layout-centered').should('have.length.gte', 1, 'should have at least one element centered.')
+    })
+
+    it('Renders the table with correct data', () => {
+      cy.visit('/imprint')
+      cy.contains('Company:')
+      cy.contains('Contentful GmbH')
+      cy.contains('Office Berlin:')
+      cy.contains('Ritterstr. 12-14')
+      cy.contains('10969 Berlin')
+      cy.contains('Germany')
+      cy.contains('Registration Court:')
+      cy.contains('Berlin-Charlottenburg HRB 155607 B')
+      cy.contains('Managing Director:')
+      cy.contains('Sascha Konietzke')
+      cy.contains('VAT Number:')
+      cy.contains('DE275148225')
+    })
+
+    it('Translates static labels', () => {
+      cy.visit('/imprint?locale=de-DE')
+      cy.contains('Firma:')
+      cy.contains('Contentful GmbH')
+      cy.contains('Büro in Berlin:')
+      cy.contains('Ritterstr. 12-14')
+      cy.contains('10969 Berlin')
+      cy.contains('Deutschland')
+      cy.contains('Amtsgericht:')
+      cy.contains('Berlin-Charlottenburg HRB 155607 B')
+      cy.contains('Verwalter:')
+      cy.contains('Sascha Konietzke')
+      cy.contains('Steuernummer:')
+      cy.contains('DE275148225')
+    })
+  })
+})
