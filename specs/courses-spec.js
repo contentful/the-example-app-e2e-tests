@@ -99,6 +99,7 @@ describe('The Example App - Courses', () => {
         })
 
       cy.visit('/courses/how-the-example-app-is-built/lessons/fetch-all-entries')
+
       cy.get('.lesson-module-code')
         .within(() => {
           cy.get('.lesson-module-code__header .lesson-module-code__trigger')
@@ -109,20 +110,20 @@ describe('The Example App - Courses', () => {
           if (language === 'nodejs') {
             language = 'javascript'
           }
-          cy.get(`.lesson-module-code__header [data-target="3QJuO2TNxm0OqSgIMaoCwi-${language}"]`)
+          cy.get(`.lesson-module-code__header [data-target="${language}"]`)
             .should('have.class', 'lesson-module-code__trigger--active', 'Correct language is active in menu by default')
-          cy.get(`.lesson-module-code__code#3QJuO2TNxm0OqSgIMaoCwi-${language}`)
+          cy.get(`.lesson-module-code__code#${language}`)
             .should('have.class', 'lesson-module-code__code--active', 'Correct language code is visible by default')
 
           // Switch to curl
-          cy.get(`.lesson-module-code__header [data-target="3QJuO2TNxm0OqSgIMaoCwi-curl"]`)
+          cy.get(`.lesson-module-code__header [data-target="curl"]`)
             .click()
             .should('have.class', 'lesson-module-code__trigger--active', 'Curl gets active when clicked')
-          cy.get(`.lesson-module-code__code#3QJuO2TNxm0OqSgIMaoCwi-curl`)
+          cy.get(`.lesson-module-code__code#curl`)
             .should('have.class', 'lesson-module-code__code--active', 'Curl code is visible when clicked')
-          cy.get(`.lesson-module-code__header [data-target="3QJuO2TNxm0OqSgIMaoCwi-${language}"]`)
+          cy.get(`.lesson-module-code__header [data-target="${language}"]`)
             .should('have.not.class', 'lesson-module-code__trigger--active', 'default language is no more active')
-          cy.get(`.lesson-module-code__code#3QJuO2TNxm0OqSgIMaoCwi-${language}`)
+          cy.get(`.lesson-module-code__code#${language}`)
             .should('have.not.class', 'lesson-module-code__code--active', 'default language code is no more visible')
         })
     })
