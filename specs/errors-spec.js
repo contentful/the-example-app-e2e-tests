@@ -37,7 +37,7 @@ describe('The Example App - Error pages', () => {
         expect(response.body).to.contain('The page you are trying to open does not exist.')
         expect(response.body).to.contain('Try the following to fix the issue(s):')
         expect(response.body).to.contain('Make sure the content you are trying to access exists and is published.')
-        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted (Content Preview API &amp; Content Delivery API).')
+        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
         expect($('nav.breadcrumb', response.body).length).to.equal(0)
       })
     })
@@ -48,7 +48,7 @@ describe('The Example App - Error pages', () => {
         expect(response.status).to.equal(404)
         expect(response.body).to.contain('The page you are trying to open does not exist.')
         expect(response.body).to.contain('Make sure the content you are trying to access exists and is published.')
-        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted (Content Preview API &amp; Content Delivery API).')
+        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
       })
     })
     it('404 with non existing courses', () => {
@@ -58,7 +58,7 @@ describe('The Example App - Error pages', () => {
         expect(response.status).to.equal(404)
         expect(response.body).to.contain('The course you are trying to open does not exist.')
         expect(response.body).to.contain('Make sure the content you are trying to access exists and is published.')
-        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted (Content Preview API &amp; Content Delivery API).')
+        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
       })
     })
     it('404 with non existing lessons', () => {
@@ -68,7 +68,7 @@ describe('The Example App - Error pages', () => {
         expect(response.status).to.equal(404)
         expect(response.body).to.contain('The lesson you are trying to open does not exist.')
         expect(response.body).to.contain('Make sure the content you are trying to access exists and is published.')
-        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted (Content Preview API &amp; Content Delivery API).')
+        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
       })
     })
     it('404 with non existing categories', () => {
@@ -78,7 +78,7 @@ describe('The Example App - Error pages', () => {
         expect(response.status).to.equal(404)
         expect(response.body).to.contain('The category you are trying to open does not exist.')
         expect(response.body).to.contain('Make sure the content you are trying to access exists and is published.')
-        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted (Content Preview API &amp; Content Delivery API).')
+        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
       })
     })
 
@@ -89,7 +89,7 @@ describe('The Example App - Error pages', () => {
         expect(response.status).to.equal(404)
         expect(response.body).to.contain('Diese Seite existiert nicht.')
         expect(response.body).to.contain('Überprüfen Sie, ob dieser Inhalt existiert und veröffentlicht wurde.')
-        expect(response.body).to.contain('Überprüfen Sie, ob der Inhalt veröffentlicht wurde, Änderungen enthält (Content Delivery API) oder gelöscht wurde (Content Preview API &amp; Content Delivery API).')
+        expect(response.body).to.contain('Überprüfen Sie, ob der Inhalt veröffentlicht wurde, Änderungen enthält (Content Delivery API) oder gelöscht wurde')
       })
     })
 
@@ -104,18 +104,6 @@ describe('The Example App - Error pages', () => {
 
   context('QA', () => {
     beforeEach(switchToQASpace)
-
-    it('500 on a locale without content', () => {
-      cy.request({
-        url: '/?locale=hi', failOnStatusCode: false
-      }).then((response) => {
-        expect(response.status).to.equal(500)
-        expect(response.body).to.contain('Check if the content model has changed. Did you delete a content type or a required field?')
-        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted (Content Preview API &amp; Content Delivery API).')
-        expect(response.body).to.contain('Check if all required fields have content for this locale.')
-      })
-    })
-
     it('does contain reset button with custom space', () => {
       cy.request({
         url: '/foo', failOnStatusCode: false
