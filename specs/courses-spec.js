@@ -69,7 +69,7 @@ describe('The Example App - Courses', () => {
     it('orders courses by creation date', () => {
       cy.visit('/courses')
 
-      cy.get('.grid-list .grid-list__item .course-card__title')
+      cy.get('.grid-list .grid-list__item .course-card__title a')
         .then(($items) => {
           const titles = Cypress._.map($items, ($item) => $item.innerText)
           const posHowTo = titles.findIndex((title) => title === 'How the example app is built')
