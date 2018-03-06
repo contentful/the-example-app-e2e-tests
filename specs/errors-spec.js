@@ -7,11 +7,11 @@ describe('The Example App - Error pages', () => {
         url: '/?space_id=1&delivery_token=2&preview_token=3'
       }).then((response) => {
         expect(response.status).to.equal(200)
-        cy.contains('Settings')
-        cy.contains('Error occurred')
-        cy.contains('Some errors occurred. Please check the error messages next to the fields.')
-        cy.contains('This space does not exist or your access token is not associated with your space.')
-        cy.contains('Your Delivery API key is invalid.')
+        expect(response.body).to.contain('Settings')
+        expect(response.body).to.contain('Error occurred')
+        expect(response.body).to.contain('Some errors occurred. Please check the error messages next to the fields.')
+        expect(response.body).to.contain('This space does not exist or your access token is not associated with your space.')
+        expect(response.body).to.contain('Your Delivery API key is invalid.')
       })
     })
     it('Invalid key fragments does not throw an error', () => {
@@ -33,11 +33,11 @@ describe('The Example App - Error pages', () => {
       }).then((response) => {
         const { $ } = Cypress
         expect(response.status).to.equal(404)
-        cy.contains('Oops, something went wrong (404)')
-        cy.contains('The page you are trying to open does not exist.')
-        cy.contains('Try the following to fix the issue(s):')
-        cy.contains('Make sure the content you are trying to access exists and is published.')
-        cy.contains('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
+        expect(response.body).to.contain('Oops, something went wrong (404)')
+        expect(response.body).to.contain('The page you are trying to open does not exist.')
+        expect(response.body).to.contain('Try the following to fix the issue(s):')
+        expect(response.body).to.contain('Make sure the content you are trying to access exists and is published.')
+        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
         expect($('nav.breadcrumb', response.body).length).to.equal(0)
       })
     })
@@ -46,9 +46,9 @@ describe('The Example App - Error pages', () => {
         url: '/courses/hello-contentful/foo', failOnStatusCode: false
       }).then((response) => {
         expect(response.status).to.equal(404)
-        cy.contains('The page you are trying to open does not exist.')
-        cy.contains('Make sure the content you are trying to access exists and is published.')
-        cy.contains('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
+        expect(response.body).to.contain('The page you are trying to open does not exist.')
+        expect(response.body).to.contain('Make sure the content you are trying to access exists and is published.')
+        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
       })
     })
     it('404 with non existing courses', () => {
@@ -56,9 +56,9 @@ describe('The Example App - Error pages', () => {
         url: '/courses/foo', failOnStatusCode: false
       }).then((response) => {
         expect(response.status).to.equal(404)
-        cy.contains('The course you are trying to open does not exist.')
-        cy.contains('Make sure the content you are trying to access exists and is published.')
-        cy.contains('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
+        expect(response.body).to.contain('The course you are trying to open does not exist.')
+        expect(response.body).to.contain('Make sure the content you are trying to access exists and is published.')
+        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
       })
     })
     it('404 with non existing lessons', () => {
@@ -66,9 +66,9 @@ describe('The Example App - Error pages', () => {
         url: '/courses/hello-contentful/lessons/foo', failOnStatusCode: false
       }).then((response) => {
         expect(response.status).to.equal(404)
-        cy.contains('The lesson you are trying to open does not exist.')
-        cy.contains('Make sure the content you are trying to access exists and is published.')
-        cy.contains('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
+        expect(response.body).to.contain('The lesson you are trying to open does not exist.')
+        expect(response.body).to.contain('Make sure the content you are trying to access exists and is published.')
+        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
       })
     })
     it('404 with non existing categories', () => {
@@ -76,9 +76,9 @@ describe('The Example App - Error pages', () => {
         url: '/courses/categories/foo', failOnStatusCode: false
       }).then((response) => {
         expect(response.status).to.equal(404)
-        cy.contains('The category you are trying to open does not exist.')
-        cy.contains('Make sure the content you are trying to access exists and is published.')
-        cy.contains('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
+        expect(response.body).to.contain('The category you are trying to open does not exist.')
+        expect(response.body).to.contain('Make sure the content you are trying to access exists and is published.')
+        expect(response.body).to.contain('Check if the content is in a draft or pending changes state (Content Delivery API), or if it has been deleted')
       })
     })
 
@@ -87,9 +87,9 @@ describe('The Example App - Error pages', () => {
         url: '/foo?locale=de-DE', failOnStatusCode: false
       }).then((response) => {
         expect(response.status).to.equal(404)
-        cy.contains('Diese Seite existiert nicht.')
-        cy.contains('Überprüfen Sie, ob dieser Inhalt existiert und veröffentlicht wurde.')
-        cy.contains('Überprüfen Sie, ob der Inhalt veröffentlicht wurde, Änderungen enthält (Content Delivery API) oder gelöscht wurde')
+        expect(response.body).to.contain('Diese Seite existiert nicht.')
+        expect(response.body).to.contain('Überprüfen Sie, ob dieser Inhalt existiert und veröffentlicht wurde.')
+        expect(response.body).to.contain('Überprüfen Sie, ob der Inhalt veröffentlicht wurde, Änderungen enthält (Content Delivery API) oder gelöscht wurde')
       })
     })
 
@@ -108,7 +108,7 @@ describe('The Example App - Error pages', () => {
       cy.request({
         url: '/foo', failOnStatusCode: false
       }).then((response) => {
-        cy.contains('Reset credentials to default')
+        expect(response.body).to.contain('Reset credentials to default')
       })
     })
   })
