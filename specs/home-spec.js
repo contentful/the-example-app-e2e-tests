@@ -81,7 +81,7 @@ describe('The Example App - Home', () => {
 
       cy.get('main .module-hero-image__image')
         .should('have.attr', 'src')
-        .and('match', /^\/\/images\.contentful\.com\//, 'link to the correct image using the image-api')
+        .and('match', /^\/\/images\.ctfassets\.net\//, 'link to the correct image using the image-api')
 
       cy.get('main .module-hero-image__headline')
         .should('contain', '[Draft] Hero Image Copy', 'displays headline')
