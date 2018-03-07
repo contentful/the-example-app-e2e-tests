@@ -23,7 +23,7 @@ describe('The Example App - Empty states', () => {
 
   context('Courses', () => {
     it('Renders empty state warning', () => {
-      cy.visit('/courses/?api=cda')
+      cy.visit('/courses?api=cda')
 
       cy.contains('No content found.')
       switchToGerman()
