@@ -21,7 +21,7 @@ function switchToEmptyStatesSpace () {
     `delivery_token=${Cypress.env('CONTENTFUL_QA_EMPTY_STATES_DELIVERY_TOKEN')}`,
     `preview_token=${Cypress.env('CONTENTFUL_QA_EMPTY_STATES_PREVIEW_TOKEN')}`
   ]
-  cy.visit(`/?${getParams.join('&')}`)
+  cy.visit(`/settings?${getParams.join('&')}`)
 }
 
 module.exports = {
