@@ -158,7 +158,8 @@ describe('The Example App - General', () => {
           cy.get('ul li').should((listItems) => {
             listItems.each((index) => {
               const links = $(listItems[index]).find('a')
-              if (links.length > 0) {
+              const href = $(links[0]).attr('href')
+              if (links.length > 0 && href.match(/https:\/\/the-example-app-([a-z]+)\.contentful\.com/)) {
                 expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*space_id=.+/)
                 expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*delivery_token=.+/)
                 expect(links[0]).attr('href').to.match(/https:\/\/[^/]+\/?.*preview_token=.+/)
