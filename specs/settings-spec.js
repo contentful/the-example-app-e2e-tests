@@ -46,10 +46,10 @@ describe('The Example App - Settings', () => {
       cy.get('.status-block--success').should('not.exist')
       cy.get('.status-block--error').should('exist')
 
-      formItemByLabel('Content Delivery API access token').parent().children('.form-item__error-wrapper')
+      formItemByLabel('Space ID').parent().children('.form-item__error-wrapper')
         .should('exist')
         .find('.form-item__error-message')
-        .should('contain', 'Your Delivery API key is invalid.')
+        .should('contain', 'This space does not exist or your access token is not associated with your space.')
     })
 
     it('shows success message when valid credentials are supplied', () => {
