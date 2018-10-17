@@ -11,7 +11,6 @@ describe('The Example App - Error pages', () => {
         expect(response.body).to.contain('Error occurred')
         expect(response.body).to.contain('Some errors occurred. Please check the error messages next to the fields.')
         expect(response.body).to.contain('This space does not exist or your access token is not associated with your space.')
-        expect(response.body).to.contain('Your Delivery API key is invalid.')
       })
     })
     it('Invalid key fragments does not throw an error', () => {
